@@ -40,6 +40,18 @@ server.get('/api/users/:id', (req, res) => {
    })
 })
 
+server.delete('/api/users/:id', (req, res) => {
+   const { id } = req.params;
+
+   db.remove(id)
+   .then(removedUser => {
+      res.json(removedUser)
+   })
+   .catch(({ code, message }) => {
+      res.status(code).json({ err: message })
+   })
+})
+
 server.listen(port, () => {
    console.log(`Listening on port ${port}`)
 })
