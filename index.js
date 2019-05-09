@@ -18,6 +18,28 @@ server.post('/api/users', (req, res) => {
    })
 })
 
+server.get('/api/users', (req, res) => {
+   db.find()
+   .then(allUsers => {
+      res.json(allUsers);
+   })
+   .catch(({ code, message }) => {
+      res.status(code).json({ err: message });
+   })
+})
+
+server.get('/api/users/:id', (req, res) => {
+   const { id } = req.params;
+
+   db.findById(id)
+   .then(userById => {
+      res.json(userById)
+   })
+   .catch(({ code, message }) => {
+      res.status(code).json({ err: message })
+   })
+})
+
 server.listen(port, () => {
    console.log(`Listening on port ${port}`)
 })
