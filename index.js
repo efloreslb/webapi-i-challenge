@@ -1,8 +1,11 @@
-// implement your API here
+require('dotenv').config(); //look for .env file and looks for key/value pairs
+// console.log('process env', process.env);
 
 const express = require('express');
 const db = require('./data/db');
-const port = 7000;
+
+const PORT = process.env.PORT || 4001;
+
 const server = express();
 server.use(express.json());
 
@@ -93,6 +96,6 @@ server.put('/api/users/:id', (req, res) => {
    })
 })
 
-server.listen(port, () => {
-   console.log(`Listening on port ${port}`)
+server.listen(PORT, () => {
+   console.log(`Listening on port ${PORT}`)
 })
